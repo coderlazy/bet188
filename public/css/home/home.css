@@ -1,0 +1,53 @@
+.team{
+    float: left;
+    display: inline-block;
+    width: 25%;
+    margin-top: 10%;
+    padding-left: 20px;
+}
+.odds{
+    float: left;
+    display: inline-block;
+    width: 25%;
+}
+.match-logo{
+    float: left;
+    display: inline-block;
+    background-image: url('https://sb-doc.sbkweb.com/Football/Participant/Watford_169393/Home01.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width:300px;
+    height: 203px
+}
+.match{
+    height: 200px
+}
+
+.odds-chap, .odds-ou{
+    border: 1px solid #e4e4e4;
+    color: #262626;
+    background-color: #fff;
+}
+.odds-chap:hover, .odds-ou:hover {
+    background-color: #fe9200 !important;
+    border-color: #fe9200;
+    cursor: pointer;
+}
+.odds-chap, .odds-ou, .odds-chap-title, .odds-ou-title{
+    text-align: center;
+    padding: 8px;
+    width: 82px;
+}
+.ticket{
+    text-align: center;
+}
+.tien-dat{
+    float: left;
+}
+.tien-thang{
+    float: right;
+}
+.dat-cuoc{
+    margin-top: 20px;
+    width: 50%;
+}
