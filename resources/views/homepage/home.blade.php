@@ -52,8 +52,8 @@
         </div>
         <div class="col-md-4"  style="text-align: center ">
             <div class="ticket" >VÉ CƯỢC</div>
-            <input class="tien-dat" type="number" >
-            <input class="tien-thang" type="number" >
+            <input class="tien-dat" type="number" placeholder="vd: 10000 VND" >
+            <input class="tien-thang" type="number" placeholder="vd: 10000 VND" >
             <input class="dat-cuoc" value="đặt cược" type="submit" >
             <div class="message" >
 

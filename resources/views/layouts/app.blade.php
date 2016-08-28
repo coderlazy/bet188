@@ -64,7 +64,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href=""><i class="fa fa-btn fa-sign-out"></i>Coins: <span class="coin" ></span></a></li>
+                                <li><a href=""><i class="fa fa-btn fa-sign-out"></i>Coins: <span class="coin" ></span> VND</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Thoát</a></li>
                             </ul>
                         </li>
