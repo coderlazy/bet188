@@ -11,6 +11,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::any('dadmyn', ['uses' => 'AdminController@index']);
     Route::any('dadmyn/create-account', ['uses' => 'AdminController@createAccount']);
     Route::any('dadmyn/manage-account', ['uses' => 'AdminController@manageAccount']);
-    Route::any('dadmyn/role', ['uses' => 'AdminController@createRole']);
+    Route::any('dadmyn/role', ['uses' => 'HomeController@createRole']);
 });
 
