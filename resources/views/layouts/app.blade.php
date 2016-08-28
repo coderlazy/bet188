@@ -65,6 +65,10 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href=""><i class="fa fa-btn fa-sign-out"></i>Coins: <span class="coin" ></span> VND</a></li>
+                                @if(Auth::user()->hasRole('admin'))
+                                    <li><a href="{{ url('dadmyn/create-account') }}"><i class="fa fa-btn fa-sign-out"></i>Tạo tài khoản</a></li>
+                                    <li><a href="{{ url('dadmyn/manage-account') }}"><i class="fa fa-btn fa-sign-out"></i>Quản lý tài khoản</a></li>
+                                @endif
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Thoát</a></li>
                             </ul>
                         </li>
