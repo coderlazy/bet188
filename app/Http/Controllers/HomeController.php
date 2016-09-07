@@ -22,6 +22,9 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
+//        dd(json_decode(file_get_contents('data (2).json')));
+        $k = json_decode(crawlData());
+        dd($k->mod->d[0]->c);
         return view('homepage.home');
     }
 
