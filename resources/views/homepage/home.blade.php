@@ -9,41 +9,38 @@
             </div>
         </div>
         <div class="col-md-8 match">
-            <div class="match-logo">
-
-            </div>
             <div class="team">
-                <div>Arsenal</div>
-                <div>Watford</div>
+                <div>{{$team1}}</div>
+                <div>{{$team2}}</div>
             </div>
             <div class="odds">
+                <h3>Kèo Châu Âu</h3>
                 <table>
                     <tr>
-                        <th class="odds-chap-title">Cược chấp</th>
-                        <th> </th>
-                        <th class="odds-ou-title">O/U</th>
-                    </tr>
-                    <tr>
-                        <td class="odds-chap" value="0.90">
-                            +0.5<br>
-                            0.90
+                        <td class="odds-chap" value="{{$odd_1x2[1]}}">
+                            {{$odd_1x2[1]}}
                         </td>
                         <td style="width: 10px" ></td>
-                        <td class="odds-ou" value="-0.83">
-                            O 4/4.5<br>
-                            -0.83
+                        <td class="odds-ou" value="{{$odd_1x2[3]}}">
+                            {{$odd_1x2[3]}}
+                        </td>
+                        <td class="odds-ou" value="{{$odd_1x2[5]}}">
+                            {{$odd_1x2[5]}}
                         </td>
                     </tr>
-                    <tr style="height: 15px;" ></tr>
+                </table>
+                 <h3>Cược chấp</h3>
+                <table>
                     <tr>
-                        <td class="odds-chap" value="-0.98">
-                            -0.5<br>
-                            -0.98
+                        <td class="odds-chap" value="{{$cuoc_chap[5]}}">
+                            {{$cuoc_chap[1] .' | '.$cuoc_chap[5]}}
                         </td>
                         <td style="width: 10px" ></td>
-                        <td class="odds-ou" value="0.73">
-                            U 4/4.5<br>
-                            0.73
+                        <td class="odds-ou" value="{{$cuoc_chap[7]}}">
+                            {{$cuoc_chap[1] .' | '.$cuoc_chap[7]}}
+                        </td>
+                        <td class="odds-ou" value="{{$cuoc_chap[5]}}">
+                            {{$cuoc_chap[1] .' | '.$cuoc_chap[3]}}
                         </td>
                     </tr>
                 </table>

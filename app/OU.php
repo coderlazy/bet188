@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Match extends Model
+class OU extends Model
 {
-    protected $table = 'match';
+     protected $table = 'ou';
 }
