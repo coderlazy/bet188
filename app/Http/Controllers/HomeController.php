@@ -23,24 +23,31 @@ class HomeController extends Controller {
      */
     public function index() {
         //while (true) {
-            $this->saveData();
-          //  sleep(300);
+        $this->saveData();
+        //  sleep(300);
         //}
-		dd("ok");
+        dd("ok");
         return view('homepage.home', compact('team1', 'team2', 'odd_1x2', 'cuoc_chap'));
     }
-    public function generateMatch(){
+
+    public function generateMatch() {
         
     }
+
     public function saveData() {
         $k = json_decode(crawlData());
-//        $all_match = $k->mod->d[0]->c;
-        dd(json_decode(file_get_contents('https://188bet.betstream.betgenius.com/betstream-view/188bet-flash-sc/eventDetailsPrioritised?eventId=1647389&culture=vi-VN&cb=1473441849039')));
-        dd($k->mod);
-//        foreach ($all_match as $match) {
-//            $match_id = $this->createMatch($match->e[0]);
-//            $this->setDataHandicap($match_id, $match->e[0]->o->ah);
-//        }
+        $all_match = $k->mod->d[0]->c;
+//        dd(json_decode(file_get_contents('https://188bet.betstream.betgenius.com/betstream-view/188bet-flash-sc/eventDetailsPrioritised?eventId=1668957&culture=vi-VN&cb=1473575819426')));
+        foreach ($all_match as $match) {
+            $match_id = $this->createMatch($match->e[0]);
+            if (isset($match->e[0]->o->ah)) {
+                $this->setDataHandicap($match_id, $match->e[0]->o->ah);
+            }
+        }
+        $all_match = \App\Match::orderBy('created_at', 'asc')->get();
+        foreach ($all_match as $m){
+            echo $m->created_at .' '.$m->home.' vs '. $m->away .'<br>';
+        }
     }
 
     public function createMatch($match_info) {
