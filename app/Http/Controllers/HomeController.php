@@ -63,6 +63,7 @@ class HomeController extends Controller {
         $all_match = $k->mod->d[0]->c;
 //        dd(json_decode(file_get_contents('https://188bet.betstream.betgenius.com/betstream-view/188bet-flash-sc/eventDetailsPrioritised?eventId=1668957&culture=vi-VN&cb=1473575819426')));
         foreach ($all_match as $match) {
+            dd($match->e[0]);
             $match_id = $this->createMatch($match->e[0]);
             if (isset($match->e[0]->o->ah)) {
                 $this->setDataHandicap($match_id, $match->e[0]->o->ah);
