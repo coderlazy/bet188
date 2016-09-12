@@ -22,7 +22,7 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-//        $this->saveData();
+        $this->saveData();
         $all_match = \App\Match::orderBy('created_at', 'asc')->get();
         $html_odd_all_match = '';
         foreach ($all_match as $key => $m) {
