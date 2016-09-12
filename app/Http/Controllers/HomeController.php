@@ -22,16 +22,40 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        //while (true) {
-        $this->saveData();
-        //  sleep(300);
-        //}
-        dd("ok");
-        return view('homepage.home', compact('team1', 'team2', 'odd_1x2', 'cuoc_chap'));
+//        $this->saveData();
+        $all_match = \App\Match::orderBy('created_at', 'asc')->get();
+        $html_odd_all_match = '';
+        foreach ($all_match as $key => $m) {
+            $match = $this->getMatchInfo($m->id);
+            if ($key % 2 == 0) {
+                $html_odd_all_match .= $this->generateMatch($match, 'up');
+            } else {
+                $html_odd_all_match .= $this->generateMatch($match, 'down');
+            }
+        }
+
+        return view('homepage.match', compact('html_odd_all_match'));
     }
 
-    public function generateMatch() {
-        
+    public function generateMatch($match, $class_html) {
+        $html_odd_match = '';
+        $i = 0;
+        $home = ['handicap' => '', 'ratio' => ''];
+        $away = ['handicap' => '', 'ratio' => ''];
+        $class = ['up', 'down'];
+        foreach ($match as $key => $data) {
+            if ($i == 0) {
+                $home['handicap'] = $data->handicap;
+                $home['ratio'] = $data->ratio;
+                $i = 1;
+            } else {
+                $away['handicap'] = $data->handicap;
+                $away['ratio'] = $data->ratio;
+                $html_odd_match .= view('homepage.item_match', compact('class_html', 'data', 'home', 'away'))->render();
+                $i = 0;
+            }
+        }
+        return $html_odd_match;
     }
 
     public function saveData() {
@@ -44,10 +68,13 @@ class HomeController extends Controller {
                 $this->setDataHandicap($match_id, $match->e[0]->o->ah);
             }
         }
-        $all_match = \App\Match::orderBy('created_at', 'asc')->get();
-        foreach ($all_match as $m){
-            echo $m->created_at .' '.$m->home.' vs '. $m->away .'<br>';
-        }
+    }
+
+    public function getMatchInfo($id) {
+        $match_infos = \App\Match::where('match.id', $id)
+                ->join('ou', 'match.id', '=', 'ou.match_id')
+                ->get();
+        return $match_infos;
     }
 
     public function createMatch($match_info) {
