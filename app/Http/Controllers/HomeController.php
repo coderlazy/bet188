@@ -61,6 +61,7 @@ class HomeController extends Controller {
     public function saveData() {
         $k = json_decode(crawlData());
         $all_match = $k->mod->d[0]->c;
+        dd($all_match);
 //        dd(json_decode(file_get_contents('https://188bet.betstream.betgenius.com/betstream-view/188bet-flash-sc/eventDetailsPrioritised?eventId=1668957&culture=vi-VN&cb=1473575819426')));
         foreach ($all_match as $match) {
             $match_id = $this->createMatch($match->e[0]);
