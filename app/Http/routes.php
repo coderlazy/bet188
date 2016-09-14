@@ -7,10 +7,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
     Route::any('home', 'HomeController@index');
     Route::any('/', 'HomeController@index');
-    Route::any('data/{id}', ['as' => 'id', 'uses' => 'HomeController@anyData']);
-    Route::any('dadmyn', ['uses' => 'AdminController@index']);
-    Route::any('dadmyn/create-account', ['uses' => 'AdminController@createAccount']);
-    Route::any('dadmyn/manage-account', ['uses' => 'AdminController@manageAccount']);
-    Route::any('dadmyn/role', ['uses' => 'HomeController@createRole']);
+    Route::any('crawl-data-inplay', ['uses' => 'HomeController@saveData']);
+    Route::any('match-info/{id}', ['as' => 'id', 'uses' => 'HomeController@getMatchInfo']);
+    Route::any('all-match-inplay', ['uses' => 'HomeController@getAllMatchInPlay']);
+    Route::group(['prefix' => 'dadmyn'], function () {
+        Route::any('/', ['uses' => 'AdminController@index']);
+        Route::any('create-account', ['uses' => 'AdminController@createAccount']);
+        Route::any('manage-account', ['uses' => 'AdminController@manageAccount']);
+        Route::any('role', ['uses' => 'HomeController@createRole']);
+    });
 });
-

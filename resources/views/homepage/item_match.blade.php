@@ -4,13 +4,13 @@
 </tr>
 <tr class="{{$class_html}}">
     <td class="headHDP ">
-        <div style="width: 50%; float: left">
-            <h5>{{$home['handicap']}}</h5>
-            <h5>{{$away['handicap']}}</h5>
+        <div class="" style="width: 50%; float: left">
+            <h5 class="{{$data->id}}-handicap-home" >{{$data->home_handicap}}</h5>
+            <h5 class="{{$data->id}}-handicap-away">{{$data->away_handicap}}</h5>
         </div>
-        <div style="width: 50%; float: right; text-align: right">
-            <h5>{{$home['ratio']}}</h5>
-            <h5>{{$away['ratio']}}</h5>
+        <div class="" style="width: 50%; float: right; text-align: right">
+            <h5 class="{{$data->id}}-ratio-home">{{$data->home_ratio}}</h5>
+            <h5 class="{{$data->id}}-ratio-away" >{{$data->away_ratio}}</h5>
         </div>
     </td>
     <td class="headOU">

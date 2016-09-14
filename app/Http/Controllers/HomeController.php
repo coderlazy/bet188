@@ -22,7 +22,7 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $this->saveData();
+//        $this->saveData();
         $all_match = \App\Match::orderBy('created_at', 'asc')->get();
         $html_odd_all_match = '';
         foreach ($all_match as $key => $m) {
@@ -40,20 +40,9 @@ class HomeController extends Controller {
     public function generateMatch($match, $class_html) {
         $html_odd_match = '';
         $i = 0;
-        $home = ['handicap' => '', 'ratio' => ''];
-        $away = ['handicap' => '', 'ratio' => ''];
         $class = ['up', 'down'];
         foreach ($match as $key => $data) {
-            if ($i == 0) {
-                $home['handicap'] = $data->handicap;
-                $home['ratio'] = $data->ratio;
-                $i = 1;
-            } else {
-                $away['handicap'] = $data->handicap;
-                $away['ratio'] = $data->ratio;
-                $html_odd_match .= view('homepage.item_match', compact('class_html', 'data', 'home', 'away'))->render();
-                $i = 0;
-            }
+            $html_odd_match .= view('homepage.item_match', compact('class_html', 'data'))->render();
         }
         return $html_odd_match;
     }
@@ -61,14 +50,20 @@ class HomeController extends Controller {
     public function saveData() {
         $k = json_decode(crawlData());
         $all_match = $k->mod->d[0]->c;
-        dd($all_match);
-//        dd(json_decode(file_get_contents('https://188bet.betstream.betgenius.com/betstream-view/188bet-flash-sc/eventDetailsPrioritised?eventId=1668957&culture=vi-VN&cb=1473575819426')));
         foreach ($all_match as $match) {
             $match_id = $this->createMatch($match->e[0]);
             if (isset($match->e[0]->o->ah)) {
                 $this->setDataHandicap($match_id, $match->e[0]->o->ah);
             }
         }
+    }
+
+    public function getAllMatchInPlay() {
+        $all_match = \App\Match::join('ou', 'ou.match_id', '=', 'match.id')
+                ->orderBy('ou.id', 'asc')
+                ->distinct()
+                ->get(['ou.id', 'match.match_id_api', 'ou.home_handicap', 'ou.home_ratio', 'ou.away_handicap', 'ou.away_ratio']);
+        return json_encode($all_match);
     }
 
     public function getMatchInfo($id) {
@@ -93,55 +88,39 @@ class HomeController extends Controller {
     public function setDataHandicap($match_id, $data) {
         $i = 0;
         $group = 0;
-        $home = '';
-        $away = '';
         foreach ($data as $key => $value) {
             if ($key % 2 != 0) {
                 switch ($i) {
                     case 0:
-                        $home = new \App\OU();
-                        $home->team = 'home';
-                        $home->match_id = $match_id;
-                        $home->handicap = $value;
+                        $ou = new \App\OU();
+                        $ou->match_id = $match_id;
+                        $ou->home_handicap = $value;
                         $i += 1;
                         break;
                     case 1:
-                        $away = new \App\OU();
-                        $away->match_id = $match_id;
-                        $away->team = 'away';
-                        $away->handicap = $value;
+                        $ou->away_handicap = $value;
                         $i += 1;
                         break;
                     case 2:
-                        $home_ou = \App\OU::where('match_id', $match_id)
-                                ->where('group', $group)
-                                ->first();
-                        if ($home_ou) {
-                            $home_ou->handicap = $home->handicap;
-                            $home_ou->ratio = $value;
-                            $home_ou->save();
-                        } else {
-                            $home->group = $group;
-                            $home->ratio = $value;
-                            $home->save();
-                            $group += 1;
-                        }
+                        $ou->home_ratio = $value;
                         $i += 1;
                         break;
                     case 3:
-                        $away_ou = \App\OU::where('match_id', $match_id)
+                        $ou->away_ratio = $value;
+                        $old_ou = \App\OU::where('match_id', $match_id)
                                 ->where('group', $group)
                                 ->first();
-                        if ($away_ou) {
-                            $away_ou->handicap = $away->handicap;
-                            $away_ou->ratio = $value;
-                            $away_ou->save();
+                        if ($old_ou) {
+                            $old_ou->home_handicap = $ou->home_handicap;
+                            $old_ou->away_handicap = $ou->away_handicap;
+                            $old_ou->home_ratio = $ou->home_ratio;
+                            $old_ou->away_ratio = $ou->away_ratio;
+                            $old_ou->save();
                         } else {
-                            $away->ratio = $value;
-                            $away->group = $group;
-                            $away->save();
-                            $group += 1;
+                            $ou->group = $group;
+                            $ou->save();
                         }
+                        $group += 1;
                         $i = 0;
                         break;
                 }
