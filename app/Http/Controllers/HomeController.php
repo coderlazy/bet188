@@ -60,7 +60,7 @@ class HomeController extends Controller {
 
     public function getAllMatchInPlay() {
         $all_match = \App\Match::join('ou', 'ou.match_id', '=', 'match.id')
-                ->orderBy('ou.id', 'asc')
+                ->orderBy('ou.id', 'desc')
                 ->distinct()
                 ->get(['ou.id', 'match.match_id_api', 'ou.home_handicap', 'ou.home_ratio', 'ou.away_handicap', 'ou.away_ratio']);
         return json_encode($all_match);
