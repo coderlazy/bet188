@@ -6,6 +6,7 @@ define('DETAIL_MATCH', 'https://188bet.betstream.betgenius.com/betstream-view/18
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
     Route::any('home', 'HomeController@index');
+    Route::any('matchinfo', 'MatchInfoController@index');
     Route::any('/', 'HomeController@index');
     Route::any('crawl-data-inplay', ['uses' => 'HomeController@saveData']);
     Route::any('match-info/{id}', ['as' => 'id', 'uses' => 'HomeController@getMatchInfo']);

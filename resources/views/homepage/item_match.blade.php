@@ -1,5 +1,6 @@
 <tr class="{{$class_html}}">
-    <td rowspan="2" class="headtime">12h24</td>
+    <td rowspan="2" class="headtime">time h-a</td>
+    
     <td rowspan="2" colspan="2" class="headevent">{{$data->home .' VS '.$data->away}}</td>
 </tr>
 <tr class="{{$class_html}}">
