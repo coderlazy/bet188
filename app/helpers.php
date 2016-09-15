@@ -58,6 +58,9 @@ function crawlData() {
 			'Accept-Language'=>'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2'
 			'Connection'=>'keep-alive'
 			'Content-Length':379,
+			'Host'=>'sb.188bet.com',
+			'Origin'=>'https://sb.188bet.com',
+'Referer'=>'https://sb.188bet.com/vi-vn/sports/all/in-play?q=&country=VN&currency=VND&tzoff=-240&allowRacing=false&reg=Vietnam',
             'content' => $postdata,
         )
     );
