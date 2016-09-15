@@ -53,6 +53,11 @@ function crawlData() {
         array(
             'method' => 'POST',
             'header' => 'Content-type: application/x-www-form-urlencoded; charset=UTF-8',
+			'Accept'=>'*/*'
+			'Accept-Encoding'=>'gzip, deflate, br',
+			'Accept-Language'=>'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2'
+			'Connection'=>'keep-alive'
+			'Content-Length':379,
             'content' => $postdata,
         )
     );
