@@ -1,0 +1,9 @@
+$k = json_decode(crawlData());
+$k là dữ liệu json trả về
+ 
+$all_match = $k->mod->d[0]->c;
+$all_match: danh sách tất cả trận đấu
+-> trong mỗi trận đấu có
++ chỉ số k là id của trận,
++ i là thông tin hai đội
++ e danh sách các kèo
