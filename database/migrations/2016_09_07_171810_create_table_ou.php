@@ -15,9 +15,6 @@ class CreateTableOu extends Migration
         Schema::create('ou', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('match_id')->index();
-            $table->enum('team', ['home', 'away'])->index();
-            $table->string('handicap')->index();
-            $table->string('ratio')->index();
             $table->timestamps();
         });
     }
