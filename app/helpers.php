@@ -23,35 +23,12 @@ function crawlData() {
                 'oPageNo' => '0'
             )
     );
-    $postdata_inplay = http_build_query(
-            array(
-                'IsFirstLoad' => 'false',
-                'VersionL' => '-1',
-                'VersionU' => '0',
-                'VersionS' => '-1',
-                'VersionF' => '-1',
-                'VersionH' => '1:0,2:0,3:0,4:0,7:0,9:0,13:0,21:0,23:0,26:0',
-                'VersionT' => '-1',
-                'IsEventMenu' => 'false',
-                'SportID' => '1',
-                'CompetitionID' => '-1',
-                'reqUrl' => '/vi-vn/sports/all/in-play',
-                'country'=>'VN',
-                'currency'=>'VND',
-                'tzoff'=>-240,
-                'allowRacing'=>false,
-                'reg'=>'Vietnam',
-                'oIsInplayAll'=>false,
-                'oVersion'=>'1,1716208|2,44174|19,3310|14,12815|16,8461',
-                'oIsFirstLoad'=>false,
-                'oSortBy'=>1,
-                'oOddsType'=>0,
-                'oPageNo'=>0,
-            )
-    );
+    
     $opts = array('http' =>
         array(
             'method' => 'POST',
+			'proxy' => 'tcp://128.199.119.133:8080',
+			'request_fulluri' => true,
             'header' => 'Content-type: application/x-www-form-urlencoded; charset=UTF-8',
 			'Accept'=>'*/*',
 			'Accept-Encoding'=>'gzip, deflate, br',
