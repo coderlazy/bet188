@@ -28,14 +28,39 @@
 @section('js')
 <script>
     $(document).ready(function () {
+		var delay = 4000;
         setInterval(function () {
             $.getJSON("/all-match-inplay", function (data) {
                 $.each(data, function (key, val) {
                     var class_match = '.' + val.id;
-                    $(class_match + '-handicap-home').text(val.home_handicap);
-                    $(class_match + '-handicap-away').text(val.away_handicap);
-                    $(class_match + '-ratio-home').text(val.home_ratio);
-                    $(class_match + '-ratio-away').text(val.away_ratio);
+					if($(class_match + '-handicap-home').text() != val.home_handicap){
+						$(class_match + '-handicap-home').text(val.home_handicap);
+						$(class_match + '-handicap-home').addClass("change");
+						setTimeout(function() {
+						  $(class_match + '-handicap-home').removeClass("change");
+						}, delay);
+					}
+                    if($(class_match + '-handicap-away').text() != val.away_handicap){
+						$(class_match + '-handicap-away').text(val.away_handicap);
+						$(class_match + '-handicap-away').addClass("change");
+						setTimeout(function() {
+						  $(class_match + '-handicap-away').removeClass("change");
+						}, delay);
+					}
+					if($(class_match + '-handicap-home').text() != val.home_handicap){
+						$(class_match + '-ratio-home').text(val.home_ratio);
+						$(class_match + '-ratio-home').addClass("change");
+						setTimeout(function() {
+						  $(class_match + '-ratio-home').removeClass("change");
+						}, delay);
+					}
+					if($(class_match + '-ratio-away').text() != val.away_ratio){
+						$(class_match + '-ratio-away').text(val.away_ratio);
+						$(class_match + '-ratio-away').addClass("change");
+						setTimeout(function() {
+						  $(class_match + '-ratio-away').removeClass("change");
+						}, delay);
+					}
                 });
             });
         }, 3000);
