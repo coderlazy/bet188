@@ -50,7 +50,6 @@ class HomeController extends Controller {
     public function saveData() {
         $k = json_decode(crawlData());
         $all_match = $k->mod->d[0]->c;
-		dd($k->mod);
         foreach ($all_match as $match) {
 			
             $match_id = $this->createMatch($match->e[0]);
