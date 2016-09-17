@@ -3,7 +3,7 @@
 <div style="text-align: center">
     <h3>Các trận đang đấu</h3>
 </div>
-<div class="container" >
+<div class="container" style="width:1170px !important" >
     <table class="col-md-12" >
         <thead>
             <tr>
