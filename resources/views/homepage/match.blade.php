@@ -38,11 +38,11 @@
                     $(class_match + '-ratio-away').text(val.away_ratio);
                 });
             });
-        }, 5000);
+        }, 3000);
          setInterval(function () {
              $.getJSON("/crawl-data-inplay", function (data) {
             });
-        }, 10000);
+        }, 5000);
     })
 </script>
 @endsection
