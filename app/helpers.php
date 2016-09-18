@@ -14,7 +14,7 @@ function crawlData() {
                 'SportID' => '1',
                 'CompetitionID' => '-1',
                 'reqUrl' => '/vi-vn/sports/all/in-play?q=&country=VN&currency=VND&tzoff=-240&allowRacing=false&reg=Vietnam',
-				//'reqUrl' =>'/vi-vn/sports/football/matches-by-date/today/full-time-asian-handicap-and-over-under',
+                //'reqUrl' =>'/vi-vn/sports/football/matches-by-date/today/full-time-asian-handicap-and-over-under',
                 'oIsInplayAll' => 'true',
                 'oVersion' => '488710',
                 'oIsFirstLoad' => 'true',
@@ -23,21 +23,21 @@ function crawlData() {
                 'oPageNo' => '0'
             )
     );
-    
+
     $opts = array('http' =>
         array(
             'method' => 'POST',
-			'proxy' => 'tcp://128.199.119.133:8080',
-			'request_fulluri' => true,
+            'proxy' => 'tcp://128.199.119.133:8080',
+            'request_fulluri' => true,
             'header' => 'Content-type: application/x-www-form-urlencoded; charset=UTF-8',
-			'Accept'=>'*/*',
-			'Accept-Encoding'=>'gzip, deflate, br',
-			'Accept-Language'=>'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2',
-			'Connection'=>'keep-alive',
-			'Content-Length'=>379,
-			'Host'=>'sb.188bet.com',
-			'Origin'=>'https://sb.188bet.com',
-'Referer'=>'https://sb.188bet.com/vi-vn/sports/all/in-play?q=&country=VN&currency=VND&tzoff=-240&allowRacing=false&reg=Vietnam',
+            'Accept' => '*/*',
+            'Accept-Encoding' => 'gzip, deflate, br',
+            'Accept-Language' => 'vi-VN,vi;q=0.8,fr-FR;q=0.6,fr;q=0.4,en-US;q=0.2,en;q=0.2',
+            'Connection' => 'keep-alive',
+            'Content-Length' => 379,
+            'Host' => 'sb.188bet.com',
+            'Origin' => 'https://sb.188bet.com',
+            'Referer' => 'https://sb.188bet.com/vi-vn/sports/all/in-play?q=&country=VN&currency=VND&tzoff=-240&allowRacing=false&reg=Vietnam',
             'content' => $postdata,
         )
     );
@@ -46,6 +46,12 @@ function crawlData() {
 
     $result = file_get_contents('http://sb.188live.net/vi-vn/Service/CentralService?GetData&ts=1472751244627', false, $context);
     return $result;
+}
+
+function crawlScroe($match_api_id) {
+    $url = 'https://188bet.betstream.betgenius.com/betstream-view/188bet-flash-sc/eventDetailsPrioritised?eventId='.$match_api_id;
+    $data = file_get_contents($url);
+    return json_decode($data);
 }
 ?>
 

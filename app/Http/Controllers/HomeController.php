@@ -22,7 +22,8 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-//        $this->saveData();
+//        $date = date_create();
+//        dd( date_timestamp_get($date));
         $all_match = \App\Match::orderBy('created_at', 'asc')->get();
         $html_odd_all_match = '';
         foreach ($all_match as $key => $m) {
@@ -51,13 +52,12 @@ class HomeController extends Controller {
         $k = json_decode(crawlData());
         $all_match = $k->mod->d[0]->c;
         foreach ($all_match as $match) {
-			
             $match_id = $this->createMatch($match->e[0]);
-			
             if (isset($match->e[0]->o->ah)) {
                 $this->setDataHandicap($match_id, $match->e[0]->o->ah);
             }
         }
+        echo "done<br><a href='/'>home</a>";
     }
 
     public function getAllMatchInPlay() {
@@ -77,6 +77,7 @@ class HomeController extends Controller {
 
     public function createMatch($match_info) {
         $match = \App\Match::where('match_id_api', '=', $match_info->k)->first();
+        dd(crawlScroe(1679609));
         if (!$match) {
             $match = new \App\Match();
             $match->match_id_api = $match_info->k;
@@ -142,9 +143,7 @@ class HomeController extends Controller {
         $admin->description = 'User is allowed to manage and edit other users'; // optional
         $admin->save();
         $user = \App\User::where('id', '=', '1')->first();
-
         $user->attachRole($admin); // parameter can be an Role object, array, or id
-        dd("done");
     }
 
 }
