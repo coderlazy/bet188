@@ -17,7 +17,7 @@ class MatchInfo extends Migration
             $table->integer('match_api_id')->index();
 	    $table->integer('home_score');
             $table->integer('away_score');
-	    $table->timestamps('start_time');
+	    $table->dateTime('start_time');
             $table->timestamps();
 	 });
     }
